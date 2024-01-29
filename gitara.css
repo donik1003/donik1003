@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@700&display=swap');
+@property --a {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+@keyframes round {
+  from {--a: 0deg}
+  to {--a: 360deg}
+}
+:root {
+  animation: round 10s linear infinite;
+  --x0: 0;
+  --y0: calc(cos(var(--a)) * 50 + 50);
+  --x3: 100;
+  --y3: calc(cos(var(--a) + 100deg) * 50 + 50);
+}
+#c1 {
+  animation: round 8s linear infinite;
+  --x1: calc(50 + sin(var(--a)) * 40);
+  --y1: calc(50 + cos(var(--a)) * 50);  
+}
+#c2 {
+  animation: round 6s linear infinite;
+  --x2: calc(50 + sin(var(--a)) * 40);
+  --y2: calc(50 + cos(var(--a)) * 50);  
+}
+body {
+  background: #ddd;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+p {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  font-family: 'Palanquin Dark', sans-serif;
+  font-size: 6vw;
+}
+
+span {
+  position: absolute;
+  --mt: calc(1 - var(--t));
+  --x: calc(var(--mt) * var(--mt) * var(--mt) * var(--x0) + 3 * var(--t) * var(--mt) * var(--mt) * var(--x1) + 3 * var(--t) * var(--t) * var(--mt) * var(--x2) + var(--t) * var(--t) * var(--t) * var(--x3));
+  --y: calc(var(--mt) * var(--mt) * var(--mt) * var(--y0) + 3 * var(--t) * var(--mt) * var(--mt) * var(--y1) + 3 * var(--t) * var(--t) * var(--mt) * var(--y2) + var(--t) * var(--t) * var(--t) * var(--y3));
+  left: calc(1vw * var(--x) - 2vw);
+  top: calc(1vh * var(--y) - 4vh);
+  color: rgb(calc((var(--y) - var(--x)) * 0.5% + 50%) calc((var(--x) - var(--y)) * 0.5% + 50%) calc(var(--x) * 1%));
+  text-shadow: calc(0.2px * var(--x)) calc(0.5px * var(--y)) calc(0.1px * (var(--x) + var(--y))) #aaa;
+}
+a{
+    border: 1px solid white;
+    text-align: center;
+    width: 100px;
+}
+a:hover{
+    border-radius: 10px;
+    color: red;
+    background-color: black;
+}
